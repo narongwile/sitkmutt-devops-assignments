@@ -58,6 +58,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 Bootstrap(app)
 
 # servicesDomain = "" if (os.environ.get("SERVICES_DOMAIN") is None) else "." + os.environ.get("SERVICES_DOMAIN")
+<<<<<<< HEAD
 detailsHostname = "details" if (os.environ.get(
     "DETAILS_HOSTNAME") is None) else os.environ.get("DETAILS_HOSTNAME")
 ratingsHostname = "ratings" if (os.environ.get(
@@ -67,6 +68,13 @@ reviewsHostname = "reviews" if (os.environ.get(
 
 flood_factor = 0 if (os.environ.get("FLOOD_FACTOR") is None) else int(
     os.environ.get("FLOOD_FACTOR"))
+=======
+detailsHostname = "details" if (os.environ.get("DETAILS_HOSTNAME") is None) else os.environ.get("DETAILS_HOSTNAME")
+ratingsHostname = "ratings" if (os.environ.get("RATINGS_HOSTNAME") is None) else os.environ.get("RATINGS_HOSTNAME")
+reviewsHostname = "reviews" if (os.environ.get("REVIEWS_HOSTNAME") is None) else os.environ.get("REVIEWS_HOSTNAME")
+
+flood_factor = 0 if (os.environ.get("FLOOD_FACTOR") is None) else int(os.environ.get("FLOOD_FACTOR"))
+>>>>>>> conflict
 
 details = {
     # "name": "http://{0}{1}:9080".format(detailsHostname, servicesDomain),
@@ -190,8 +198,12 @@ def getForwardHeaders(request):
     if 'user' in session:
         headers['end-user'] = session['user']
 
+<<<<<<< HEAD
     incoming_headers = ['x-request-id', 'x-datadog-trace-id',
                         'x-datadog-parent-id', 'x-datadog-sampled']
+=======
+    incoming_headers = ['x-request-id', 'x-datadog-trace-id', 'x-datadog-parent-id', 'x-datadog-sampled']
+>>>>>>> conflict
 
     # Add user-agent to headers manually
     if 'user-agent' in request.headers:
@@ -232,11 +244,17 @@ def login():
     return response
 
 
+<<<<<<< HEAD
 @app.route('/logout', methods=['GET'])
 def logout():
     response = app.make_response(redirect(request.referrer))
     session.pop('user', None)
     return response
+=======
+@app.route('/newfunction')
+def newfunction():
+    return 'This is new function'
+>>>>>>> conflict
 
 # a helper function for asyncio.gather, does not return a value
 
@@ -325,17 +343,26 @@ def getProducts():
 
 
 def getProduct(product_id):
+<<<<<<< HEAD
     products = getProducts()
     if product_id + 1 > len(products):
         return None
     else:
         return products[product_id]
+=======
+    # TODO
+    return None
+>>>>>>> conflict
 
 
 def getProductDetails(product_id, headers):
     try:
+<<<<<<< HEAD
         url = details['name'] + "/" + \
             details['endpoint'] + "/" + str(product_id)
+=======
+        url = details['name'] + "/" + details['endpoint'] + "/" + str(product_id)
+>>>>>>> conflict
         res = requests.get(url, headers=headers, timeout=3.0)
     except BaseException:
         res = None
@@ -351,8 +378,12 @@ def getProductReviews(product_id, headers):
     # TODO: Figure out how to achieve the same effect using Envoy retries/timeouts
     for _ in range(2):
         try:
+<<<<<<< HEAD
             url = reviews['name'] + "/" + \
                 reviews['endpoint'] + "/" + str(product_id)
+=======
+            url = reviews['name'] + "/" + reviews['endpoint'] + "/" + str(product_id)
+>>>>>>> conflict
             res = requests.get(url, headers=headers, timeout=3.0)
         except BaseException:
             res = None
@@ -364,8 +395,12 @@ def getProductReviews(product_id, headers):
 
 def getProductRatings(product_id, headers):
     try:
+<<<<<<< HEAD
         url = ratings['name'] + "/" + \
             ratings['endpoint'] + "/" + str(product_id)
+=======
+        url = ratings['name'] + "/" + ratings['endpoint'] + "/" + str(product_id)
+>>>>>>> conflict
         res = requests.get(url, headers=headers, timeout=3.0)
     except BaseException:
         res = None
